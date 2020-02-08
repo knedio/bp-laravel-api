@@ -1,15 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, SoftDeletes;
     
     /**
      * The attributes that are mass assignable.
@@ -43,16 +44,9 @@ class User extends Authenticatable
         return $this->hasOne(UserDetail::class, 'user_id');
     }
 
-    public static function get($id)
+    public static function show($id)
     {
         return User::with('detail')->where('id',$id)->first();
-    }
-
-    public static function getAll()
-    {
-        return User::with('detail')
-            ->where('status', 1)
-            ->get();
     }
 
     public static function getPassword($id){

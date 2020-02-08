@@ -27,44 +27,49 @@ Route::group([
     'namespace'     => 'Api',
 ], function () {
 
-    // Authentication
-    Route::group([
-        'prefix' => 'auth',
-    ], function(){
-        // public routes
-        Route::post('login', 'AuthController@login');
-        Route::post('store', 'AuthController@store');
-        Route::patch('reset-password', 'AuthController@resetPassword');
+    // Authentication Module
+	Route::group([
+		'namespace' => 'Auth',
+	], function(){
+		Route::group([
+			'prefix' => 'auth',
+		], function(){
+            Route::post('forgot-password', 'ForgotPasswordController');
+            Route::post('reset-password', 'ResetPasswordForgotPasswordController');
+            Route::post('login', 'LoginController');
+            Route::post('logout', 'LogoutController');
+		});
+		Route::resource('auth', 'AuthController');
+	});
+	
+	// User Module
+	Route::group([
+		'middleware' => [
+			'auth:api',
+		],
+		'namespace' => 'User',
+	], function(){
+		Route::group([
+			'prefix' => 'user',
+		], function(){
+            Route::patch('reset-password/{user}', 'ResetPasswordToDefaultController');
+            Route::patch('change-password/{user}', 'ChangePasswordController');
+		});
+		Route::resource('user', 'UserController');
+	});
+	
+	// Role Module
+	Route::group([
+		'middleware' => [
+			'auth:api',
+		],
+		'namespace' => 'Role',
+	], function(){
+		Route::group([
+			'prefix' => 'role',
+		], function(){
 
-        // private routes
-        Route::group([
-            'middleware' => [
-                'auth:api',
-            ],
-        ], function(){
-            Route::get('logout', 'AuthController@logout');
         });
-    });
-
-    // User
-    Route::group([
-        'prefix' => 'user',
-    ], function(){
-
-        // private routes
-        Route::group([
-            'middleware' => [
-                'auth:api',
-            ],
-        ], function(){
-            Route::patch('update/{id}', 'UserController@update');
-            Route::patch('reset-password/{id}', 'UserController@resetPasswordDefault');
-            Route::patch('change-password', 'UserController@changePassword');
-            Route::delete('destroy/{id}', 'UserController@destroy');
-            Route::get('get/{id}', 'UserController@get');
-            Route::get('get-all', 'UserController@getAll');
-        });
-    });
-    
-
+		Route::resource('role', 'RoleController');
+	});
 });
