@@ -44,9 +44,14 @@ class User extends Authenticatable
         return $this->hasOne(UserDetail::class, 'user_id');
     }
 
+    public function userRole()
+    {
+        return $this->hasOne(UserRole::class, 'user_id');
+    }
+
     public static function show($id)
     {
-        return User::with('detail')->where('id',$id)->first();
+        return User::with('detail', 'userRole.role')->where('id',$id)->first();
     }
 
     public static function getPassword($id){

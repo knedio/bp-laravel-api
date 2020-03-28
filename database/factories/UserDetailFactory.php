@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\UserDetail;
+use App\Model\UserDetail;
 use Faker\Generator as Faker;
 
 $factory->define(UserDetail::class, function (Faker $faker) {

@@ -34,9 +34,9 @@ class AuthTest extends TestCase
 
     public function test_a_auth_request_login() {
         // create user
-    	$user = factory('App\User')->create();
+    	$user = factory('App\Model\User')->create();
 
-        $userDetail = factory('App\UserDetail')->create([
+        $userDetail = factory('App\Model\UserDetail')->create([
             'user_id' => $user->id,
         ]);
 
@@ -67,9 +67,9 @@ class AuthTest extends TestCase
     //     // auth user
     //     $auth = $this->actingAs($this->user, 'api');
         
-    //     $user = factory('App\User')->create();
+    //     $user = factory('App\Model\User')->create();
         
-    //     $userDetail = factory('App\UserDetail')->create([
+    //     $userDetail = factory('App\Model\UserDetail')->create([
     //         'user_id' => $user->id,
     //     ]);
 

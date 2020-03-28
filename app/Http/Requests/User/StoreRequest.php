@@ -24,8 +24,8 @@ class StoreRequest extends FormRequest
     public function attributes()
     {
         return [
-            'first_name'        => 'First Name',
-            'last_name'         => 'Last Name',
+            'firstName'        => 'First Name',
+            'lastName'         => 'Last Name',
             'email'             => 'Email Address',
             'password'          => 'Password',
             'confirm_password'  => 'Confirm Password',
@@ -40,11 +40,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'        => 'required',
-            'last_name'         => 'required',
+            'firstName'        => 'required',
+            'lastName'         => 'required',
             'email'             => 'required|email|unique:users,email',
             'password'          => 'required',
-            'confirm_password'  => 'required|same:password', 
+            'confirmPassword'  => 'required|same:password', 
         ];
     }
 }

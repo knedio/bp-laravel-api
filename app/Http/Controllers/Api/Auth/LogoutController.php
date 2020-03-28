@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Session;
+use Auth;
 
 class LogoutController extends Controller
 {
@@ -16,13 +18,22 @@ class LogoutController extends Controller
     public function __invoke(Request $request)
     {
         try { 
-            $token = $request->user()->token();
-            $token->revoke();
-        
-            return response([
-                'message'   => 'Successful! User logged out.'
-            ], 200);
+            if (!$this->guard()->check()) {
+                return response()->json([
+                    'message'   => 'No active user session was found.',
+                ], 401); 
+            } 
+            if (null !== $request->user('api') ) {
 
+                $request->user('api')->token()->revoke();
+                Auth::guard()->logout();
+                Session::flush();
+                Session::regenerate();
+      
+                return response()->json([
+                    'message'   => 'Successful! Logging out.',
+                ], 200); 
+            }
         } catch (Exception $e) {
             $status = 400;
 
@@ -33,5 +44,9 @@ class LogoutController extends Controller
             ], $status); 
         }
         
+    }
+    
+    protected function guard(){
+        return Auth::guard('api');
     }
 }

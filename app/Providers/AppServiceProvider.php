@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Validator;
-use App\User;
+use App\Model\User;
 use Hash;
 use Auth;
 

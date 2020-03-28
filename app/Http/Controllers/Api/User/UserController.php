@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::with('detail')
+            $users = User::with('detail', 'userRole.role')
                 ->where('status', 1)
                 ->get();
                 
@@ -89,8 +89,8 @@ class UserController extends Controller
 
             $detail = UserDetail::create([
                 'user_id'       => $user->id,
-                'first_name'    => $request->first_name,
-                'last_name'     => $request->last_name,
+                'firstName'    => $request->firstName,
+                'lastName'     => $request->lastName,
             ]);
 
             $user = User::show($user->id);
@@ -130,9 +130,9 @@ class UserController extends Controller
             $detail = UserDetail::where('user_id', $user->id)->first();
 
             $detail->update($request->only([
-                'first_name',
-                'middle_name',
-                'last_name',
+                'firstName',
+                'middleName',
+                'lastName',
                 'address',
                 'gender',
             ]));

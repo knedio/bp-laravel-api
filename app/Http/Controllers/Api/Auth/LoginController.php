@@ -36,8 +36,8 @@ class LoginController extends Controller
 
             if(!$check_user) {
                 return response([
-                    'message'   => 'The password or email is incorrect!'
-                ], 422);
+                    'message'   => 'Email Address or Password is incorrect! Please try again.'
+                ], 404);
             } 
 
             return response([

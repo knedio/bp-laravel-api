@@ -6,8 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\User;
-use App\UserDetail;
+use App\Model\User;
+use App\Model\UserDetail;
 
 class UserTest extends TestCase
 {
@@ -22,7 +22,7 @@ class UserTest extends TestCase
         // $this->artisan('db:seed');
         $this->artisan('passport:install');
 
-        $this->user = factory(\App\User::class)->create();
+        $this->user = factory(\App\Model\User::class)->create();
 
     }
 
@@ -31,9 +31,9 @@ class UserTest extends TestCase
 
         $auth = $this->actingAs($this->user, 'api');
 
-        $user = factory('App\User')->create();
+        $user = factory('App\Model\User')->create();
 
-        $userDetail = factory('App\UserDetail')->create([
+        $userDetail = factory('App\Model\UserDetail')->create([
             'user_id' => $user->id,
         ]);
 
@@ -55,9 +55,9 @@ class UserTest extends TestCase
         // auth user
         $auth = $this->actingAs($this->user, 'api');
         
-        $user = factory('App\User')->create();
+        $user = factory('App\Model\User')->create();
         
-        $userDetail = factory('App\UserDetail')->create([
+        $userDetail = factory('App\Model\UserDetail')->create([
             'user_id' => $user->id,
         ]);
 
@@ -70,9 +70,9 @@ class UserTest extends TestCase
         // auth user
         $auth = $this->actingAs($this->user, 'api');
         
-        $user = factory('App\User')->create();
+        $user = factory('App\Model\User')->create();
         
-        $userDetail = factory('App\UserDetail')->create([
+        $userDetail = factory('App\Model\UserDetail')->create([
             'user_id' => $user->id,
         ]);
 
@@ -85,9 +85,9 @@ class UserTest extends TestCase
         // auth user
         $auth = $this->actingAs($this->user, 'api');
         
-        $user = factory('App\User')->create();
+        $user = factory('App\Model\User')->create();
         
-        $userDetail = factory('App\UserDetail')->create([
+        $userDetail = factory('App\Model\UserDetail')->create([
             'user_id' => $user->id,
         ]);
 

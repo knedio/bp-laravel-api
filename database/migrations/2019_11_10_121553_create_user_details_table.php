@@ -19,9 +19,9 @@ class CreateUserDetailsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->string('first_name');
-            $table->string('middle_name')->nullable();
-            $table->string('last_name');
+            $table->string('firstName');
+            $table->string('middleName')->nullable();
+            $table->string('lastName');
             $table->string('address')->nullable();
             $table->enum('gender', ['male', 'female', 'rather not to say'])->nullable();
             $table->timestamps();

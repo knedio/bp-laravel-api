@@ -38,6 +38,7 @@ Route::group([
             Route::post('reset-password', 'ResetPasswordForgotPasswordController');
             Route::post('login', 'LoginController');
             Route::post('logout', 'LogoutController');
+            Route::post('register', '\App\Http\Controllers\Api\User\UserController@store');
 		});
 		Route::resource('auth', 'AuthController');
 	});

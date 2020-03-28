@@ -24,8 +24,8 @@ class UpdateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'first_name'    => 'First Name',
-            'last_name'     => 'Last Name',
+            'firstName'    => 'First Name',
+            'lastName'     => 'Last Name',
             'email'         => 'Email Address',
         ];
     }
@@ -39,8 +39,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'id'            => 'required|exists:users,id',
-            'first_name'    => 'required',
-            'last_name'     => 'required',
+            'firstName'    => 'required',
+            'lastName'     => 'required',
             'email'         => 'required|email|unique:users,email,'.$this->get('id'),
         ];
     }
