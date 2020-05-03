@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\ChangePasswordRequest;
+use App\Model\User;
 
 class ChangePasswordController extends Controller
 {
@@ -19,7 +20,7 @@ class ChangePasswordController extends Controller
     {   
         try {
             $user->update([
-                'password'  => bcrypt($request->new_password)
+                'password'  => bcrypt($request->newPassword)
             ]);
 
             return response([

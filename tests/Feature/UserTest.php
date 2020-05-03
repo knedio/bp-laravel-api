@@ -39,14 +39,12 @@ class UserTest extends TestCase
 
         $data = [
             'id'            => $user->id,
-            'first_name'    => $this->faker->firstName(),
-            'last_name'     => $this->faker->lastName(),
+            'firstName'    => $this->faker->firstName(),
+            'lastName'     => $this->faker->lastName(),
             'email'         => $this->faker->unique()->safeEmail,
-            // 'address'       => $this->faker->address(),
-            // 'gender'        => 'male',
         ];
 
-        $res = $this->patch('/api/v1/user/update/' . $user->id, $data);
+        $res = $this->patch('/api/v1/user/' . $user->id, $data);
         $res->assertStatus(200);
 
     }
@@ -61,7 +59,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $res = $this->delete('/api/v1/user/destroy/'.$user->id, []);
+        $res = $this->delete('/api/v1/user/'.$user->id, []);
 
         $res->assertStatus(200);
     }
@@ -76,7 +74,9 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $res = $this->patch('/api/v1/user/reset-password/'.$user->id, []);
+        $res = $this->patch('/api/v1/user/reset-password/' . $user->id, [
+            'user_id'  => $user->id
+        ]);
 
         $res->assertStatus(200);
     }
@@ -91,11 +91,11 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $res = $this->patch('/api/v1/user/change-password', [
-            'id'                => $user->id,
-            'current_password'  => 'secret', 
-            'new_password'      => 'secret123', 
-            'confirm_password'  => 'secret123', 
+        $res = $this->patch('/api/v1/user/change-password/' . $user->id, [
+            'id'               => $user->id,
+            'currentPassword'  => 'secret', 
+            'newPassword'      => 'secret123', 
+            'confirmPassword'  => 'secret123', 
         ]);
 
         $res->assertStatus(200);

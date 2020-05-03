@@ -40,7 +40,10 @@ class AuthTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-    	$res = $this->post('/api/v1/auth/login', ['email' => $user->email, 'password' => 'secret']);
+    	$res = $this->post('/api/v1/auth/login', [
+            'email'     => $user->email, 
+            'password'  => 'secret'
+        ]);
 
         $res->assertSeeText('token');
 
@@ -52,14 +55,14 @@ class AuthTest extends TestCase
         $password = $this->faker->password();
 
         $data = [
-            'first_name'     => $this->faker->firstName(),
-            'last_name'      => $this->faker->lastName(),
+            'firstName'     => $this->faker->firstName(),
+            'lastName'      => $this->faker->lastName(),
             'email'         => $this->faker->unique()->safeEmail,
             'password'          => $password,
-            'confirm_password'  => $password,
+            'confirmPassword'   => $password,
         ];
         
-        $res = $this->json('POST', '/api/v1/auth/store', $data);
+        $res = $this->json('POST', '/api/v1/auth/register', $data);
         $res->assertStatus(200);
     }
 

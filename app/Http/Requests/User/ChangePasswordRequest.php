@@ -25,9 +25,9 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             'id'                => 'User ID',
-            'current_password'  => 'Current Password',
-            'mew_password'      => 'New Password',
-            'current_password'  => 'Confirm Password',
+            'currentPassword'   => 'Current Password',
+            'newPassword'       => 'New Password',
+            'confirmPassword'   => 'Confirm Password',
         ];
     }
 
@@ -39,10 +39,10 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'                => 'required',
-            'current_password'  => 'required|old_password:' . $this->get('id'), 
-            'new_password'      => 'required', 
-            'confirm_password'  => 'required|same:new_password', 
+            'id'               => 'required',
+            'currentPassword'  => 'required|old_password:' . $this->get('id'), 
+            'newPassword'      => 'required', 
+            'confirmPassword'  => 'required|same:newPassword', 
         ];
     }
 }

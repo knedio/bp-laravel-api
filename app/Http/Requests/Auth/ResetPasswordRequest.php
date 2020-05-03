@@ -25,8 +25,8 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
             'email'             => 'Email Address',
-            'new_password'      => 'New Password',
-            'confirm_password'  => 'Confirm Password',
+            'newPassword'      => 'New Password',
+            'confirmPassword'  => 'Confirm Password',
             'password_token'    => 'Password Token',
         ];
     }
@@ -40,8 +40,8 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
             'email'             => 'required|email|exists:users,email',
-            'new_password'      => 'required', 
-            'confirm_password'  => 'required|same:new_password', 
+            'newPassword'      => 'required', 
+            'confirmPassword'  => 'required|same:newPassword', 
             'password_token'    => 'required|exists:password_resets,token', 
         ];
     }

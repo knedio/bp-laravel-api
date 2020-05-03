@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\User;
 
 class ResetPasswordToDefaultController extends Controller
 {
