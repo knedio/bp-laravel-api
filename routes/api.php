@@ -34,11 +34,19 @@ Route::group([
 		Route::group([
 			'prefix' => 'auth',
 		], function(){
+			// public
             Route::post('forgot-password', 'ForgotPasswordController');
             Route::post('reset-password', 'ResetPasswordForgotPasswordController');
             Route::post('login', 'LoginController');
             Route::post('logout', 'LogoutController');
-            Route::post('register', '\App\Http\Controllers\Api\User\UserController@store');
+			Route::post('register', '\App\Http\Controllers\Api\User\UserController@store');
+			
+			// private
+			Route::group([
+				'middleware' => [ 'auth:api' ],
+			], function(){
+				Route::get('show', 'AuthController@show');
+			});
 		});
 		Route::resource('auth', 'AuthController');
 	});

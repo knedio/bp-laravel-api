@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\User;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -23,9 +25,30 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        try {
+            $user = User::show(Auth::user()->id);
+
+            if(!$user) {
+                return response([
+                    'message'   => 'Sorry! User not found.',
+                ]);    
+            }
+
+            return response([
+                'message'   => 'Successful! Getting auth user information.',
+                'user'      => $user,
+            ]);
+        } catch (Exception $e) {
+            $status = 400;
+
+            if ($this->isHttpException($e)) $status = $e->getStatusCode();
+
+            return response([
+                'message'   => 'Something went wrong.'
+            ], $status); 
+        }
     }
 
     /**
